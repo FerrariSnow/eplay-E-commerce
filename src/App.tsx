@@ -1,13 +1,15 @@
+import Hero from './components/Banner'
 import Header from './components/Header'
-import { Container, GlobalCSS } from './styles'
+import { GlobalCSS } from './styles'
 
 function App() {
   return (
     <>
       <GlobalCSS />
-      <Container>
+      <div className="container">
         <Header />
-      </Container>
+      </div>
+      <Hero />
     </>
   )
 }
