@@ -3,7 +3,7 @@ import bannerImg from '../../assets/images/banner-miranha.png'
 import Tag from '../Tag'
 import Button from '../Button'
 
-const Banner = () => (
+export const Banner = () => (
   <Hero style={{ backgroundImage: `url(${bannerImg})` }}>
     <div className="container">
       <Tag size="big">Destaque do dia</Tag>
