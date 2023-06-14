@@ -3,6 +3,8 @@ import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 import Gallery from '../../components/Gallery'
 
+import witcher from '../../assets/images/witcher3.png'
+
 const Product = () => {
   const { id } = useParams()
   return (
@@ -33,7 +35,7 @@ const Product = () => {
           legenda podem ser ajustadas nas configurações do jogo.
         </p>
       </Section>
-      <Gallery></Gallery>
+      <Gallery defaultCover={witcher} name="The Witcher 3"></Gallery>
     </>
   )
 }
