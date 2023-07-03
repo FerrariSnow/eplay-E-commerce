@@ -4,7 +4,7 @@ import { Props } from '.'
 import { cores } from '../../styles'
 import { Card } from '../Product/styles'
 
-export const Container = styled.section<Omit<Props, 'titulo' | 'games'>>`
+export const Container = styled.section<Omit<Props, 'title' | 'games'>>`
   padding: 32px 0;
   background-color: ${(props) =>
     props.fundo === 'preto' ? cores.preta : cores.cinza};
@@ -18,7 +18,7 @@ export const Container = styled.section<Omit<Props, 'titulo' | 'games'>>`
 export const Lista = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  column-gap: 24px;
+  gap: 24px;
   margin-top: 40px;
 `
 

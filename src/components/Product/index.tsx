@@ -3,27 +3,45 @@ import Tag from '../Tag'
 import { Card, Titulo, Descricao, Infos } from './styles'
 
 type Props = {
-  titulo: string
-  categoria: string
-  OS: string
-  descricao: string
+  title: string
+  category: string
+  system: string
+  description: string
   infos: string[]
   image: string
+  id: number
 }
 
-const Product = ({ titulo, categoria, OS, descricao, infos, image }: Props) => (
-  <Card>
-    <img src={image} alt={titulo} />
-    <Infos>
-      {infos.map((info) => (
-        <Tag key={info}>{info}</Tag>
-      ))}
-    </Infos>
-    <Titulo>{titulo}</Titulo>
-    <Tag>{categoria}</Tag>
-    <Tag>{OS}</Tag>
-    <Descricao>{descricao}</Descricao>
-  </Card>
-)
+const Product = ({
+  title,
+  category,
+  system,
+  description,
+  infos,
+  image,
+  id
+}: Props) => {
+  const getDescricao = (description: string) => {
+    if (description.length > 95) {
+      return description.slice(0, 92) + '...'
+    }
+    return description
+  }
+
+  return (
+    <Card to={`/product/${id}`}>
+      <img src={image} alt={title} />
+      <Infos>
+        {infos.map((info) => (
+          <Tag key={info}>{info}</Tag>
+        ))}
+      </Infos>
+      <Titulo>{title}</Titulo>
+      <Tag>{category}</Tag>
+      <Tag>{system}</Tag>
+      <Descricao>{getDescricao(description)}</Descricao>
+    </Card>
+  )
+}
 
 export default Product

@@ -1,5 +1,7 @@
-import Section from '../Section'
+import { useState } from 'react'
 
+import Section from '../Section'
+import { GalleryItem } from '../../pages/Home'
 import { Itens, Item, Action, Modal, ModalContent } from './styles'
 
 import play from '../../assets/images/play.svg'
@@ -7,12 +9,6 @@ import zoom from '../../assets/images/zoom.svg'
 import fechar from '../../assets/images/fechar.svg'
 import witcher3 from '../../assets/images/herosimg/hero-witcher.jpg'
 import rdr2 from '../../assets/images/herosimg/hero-rdr2.jpg'
-import { useState } from 'react'
-
-interface GalleryItem {
-  type: 'image' | 'video'
-  url: string
-}
 
 const mock: GalleryItem[] = [
   {
@@ -32,13 +28,14 @@ const mock: GalleryItem[] = [
 type Props = {
   defaultCover: string
   name: string
+  items: GalleryItem[]
 }
 
 interface ModalState extends GalleryItem {
   isVisible: boolean
 }
 
-const Gallery = ({ defaultCover, name }: Props) => {
+const Gallery = ({ defaultCover, name, items }: Props) => {
   const [modal, setModal] = useState<ModalState>({
     isVisible: false,
     type: 'image',
@@ -71,7 +68,7 @@ const Gallery = ({ defaultCover, name }: Props) => {
     <>
       <Section title="Galeria" fundo="preto">
         <Itens>
-          {mock.map((media, index) => (
+          {items.map((media, index) => (
             <Item
               key={media.url}
               onClick={() => {
