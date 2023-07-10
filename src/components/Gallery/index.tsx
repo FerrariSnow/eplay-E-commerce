@@ -7,23 +7,6 @@ import { Itens, Item, Action, Modal, ModalContent } from './styles'
 import play from '../../assets/images/play.svg'
 import zoom from '../../assets/images/zoom.svg'
 import fechar from '../../assets/images/fechar.svg'
-import witcher3 from '../../assets/images/herosimg/hero-witcher.jpg'
-import rdr2 from '../../assets/images/herosimg/hero-rdr2.jpg'
-
-const mock: GalleryItem[] = [
-  {
-    type: 'image',
-    url: witcher3
-  },
-  {
-    type: 'image',
-    url: rdr2
-  },
-  {
-    type: 'video',
-    url: 'https://www.youtube.com/embed/qy8jmm9kY4A'
-  }
-]
 
 type Props = {
   defaultCover: string
