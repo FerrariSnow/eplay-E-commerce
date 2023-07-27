@@ -20,7 +20,6 @@ export const Container = styled.div`
   }
 
   p {
-    text-indent: 18px;
     font-size: 14px;
     line-height: 22px;
   }
