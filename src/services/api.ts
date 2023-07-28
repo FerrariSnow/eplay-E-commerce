@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Game } from '../pages/Home'
-import { StringDecoder } from 'string_decoder'
 
 type Product = {
   id: number
