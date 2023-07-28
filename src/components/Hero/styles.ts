@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { TagContainer } from '../Tag/styles'
 
-export const HeroProduct = styled.div`
+export const Banner = styled.div`
   position: relative;
   display: block;
   height: 480px;
@@ -45,7 +45,7 @@ export const HeroProduct = styled.div`
 
 export const Infos = styled.div`
   padding: 16px;
-  background-color: ${cores.preta};
+  background-color: ${colors.black};
   max-width: 290px;
   font-weight: bold;
 
