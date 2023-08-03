@@ -3,15 +3,17 @@ import Product from '../Product'
 import { parseToBrl } from '../../utils'
 
 import * as S from './styles'
+import Loader from '../Loader'
 
 export type Props = {
   title: string
   fundo: 'cinza' | 'preto'
-  games: Game[]
+  games?: Game[]
   id?: string
+  isLoading?: boolean
 }
 
-const ProductsList = ({ title, fundo, games, id }: Props) => {
+const ProductsList = ({ title, fundo, games, id, isLoading }: Props) => {
   const getGameTags = (game: Game) => {
     const tags = []
 
@@ -30,25 +32,30 @@ const ProductsList = ({ title, fundo, games, id }: Props) => {
     return tags
   }
 
+  if (isLoading) {
+    return <Loader />
+  }
+
   return (
     <S.Container id={id} fundo={fundo}>
       <div className="container">
         <S.TituloLista>{title}</S.TituloLista>
         <S.Lista>
-          {games.map((game) => (
-            <li key={game.id}>
-              <Product
-                id={game.id}
-                key={game.id}
-                title={game.name}
-                category={game.details.category}
-                system={game.details.system}
-                description={game.description}
-                image={game.media.thumbnail}
-                infos={getGameTags(game)}
-              />
-            </li>
-          ))}
+          {games &&
+            games.map((game) => (
+              <li key={game.id}>
+                <Product
+                  id={game.id}
+                  key={game.id}
+                  title={game.name}
+                  category={game.details.category}
+                  system={game.details.system}
+                  description={game.description}
+                  image={game.media.thumbnail}
+                  infos={getGameTags(game)}
+                />
+              </li>
+            ))}
         </S.Lista>
       </div>
     </S.Container>

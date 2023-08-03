@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
+import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 
 import Button from '../../components/Button'
 import Card from '../../components/Card'
@@ -9,12 +11,24 @@ import barCode from '../../assets/images/barCode.svg'
 import creditCard from '../../assets/images/creditCard.svg'
 
 import { usePurchaseMutation } from '../../services/api'
+import { RootReducer } from '../../store'
 
 import * as S from './styles'
+import { getTotalPrice, parseToBrl } from '../../utils'
+
+type Installment = {
+  quantity: number
+  amount: number
+  formattedAmount: string
+}
 
 const Checkout = () => {
   const [payWithCard, setPayWithCard] = useState(false)
   const [purchase, { data, isSuccess }] = usePurchaseMutation()
+  const { items } = useSelector((state: RootReducer) => state.cart)
+  const [installments, setInstallments] = useState<Installment[]>([])
+
+  const totalPrice = getTotalPrice(items)
 
   const form = useFormik({
     initialValues: {
@@ -107,20 +121,34 @@ const Checkout = () => {
     }
   })
 
-  const getErrorMessage = (fieldName: string, message?: string) => {
-    const isTouched = fieldName in form.touched
-    const isInvalid = fieldName in form.errors
-
-    if (isTouched && isInvalid) return message
-    return ''
-  }
-
   const checkInputHasError = (fieldName: string) => {
     const isTouched = fieldName in form.touched
     const isInvalid = fieldName in form.errors
     const hasError = isTouched && isInvalid
 
     return hasError
+  }
+
+  useEffect(() => {
+    const calculateInstallments = () => {
+      const installmentsArray: Installment[] = []
+      for (let i = 1; i <= 6; i++) {
+        installmentsArray.push({
+          quantity: i,
+          amount: totalPrice / i,
+          formattedAmount: parseToBrl(totalPrice / i)
+        })
+      }
+      return installmentsArray
+    }
+
+    if (totalPrice > 0) {
+      setInstallments(calculateInstallments())
+    }
+  }, [totalPrice])
+
+  if (items.length === 0) {
+    return <Navigate to="/" />
   }
 
   return (
@@ -379,9 +407,12 @@ const Checkout = () => {
                             checkInputHasError('installments') ? 'error' : ''
                           }
                         >
-                          <option value="">1x de R$ 200,00</option>
-                          <option value="">2x de R$ 200,00</option>
-                          <option value="">3x de R$ 200,00</option>
+                          {installments.map((installment) => (
+                            <option value="" key={installment.quantity}>
+                              {installment.quantity}x de{' '}
+                              {installment.formattedAmount}
+                            </option>
+                          ))}
                         </select>
                       </S.InputGroup>
                     </S.Row>
