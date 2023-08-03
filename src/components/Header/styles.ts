@@ -88,6 +88,7 @@ export const CartButton = styled.a`
 
   img {
     margin-left: 16px;
+    cursor: pointer;
   }
 
   @media (max-width: ${breakpoints.tablet}) {
