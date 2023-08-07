@@ -10,7 +10,7 @@ export type Props = {
   fundo: 'cinza' | 'preto'
   games?: Game[]
   id?: string
-  isLoading?: boolean
+  isLoading: boolean
 }
 
 const ProductsList = ({ title, fundo, games, id, isLoading }: Props) => {
