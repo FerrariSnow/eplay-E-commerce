@@ -1,3 +1,9 @@
+# Application operation video
+
+
+https://github.com/FerrariSnow/eplay-E-commerce/assets/80928188/c426d98f-cadb-444b-a2e3-96aa59e8af47
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
